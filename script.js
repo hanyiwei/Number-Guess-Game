@@ -55,10 +55,12 @@ numCard.addEventListener('mouseenter', () => {
       hint.classList.remove('hidden');
       // 强制浏览器重绘
       void hint.offsetHeight;
-      if (startGame.classList.contains('active')) {
-            hint.style.marginTop = '-72%';
-      } else {
+      if (startGame.classList.contains('active') && !history.classList.contains('hidden')) {
             hint.style.marginTop = '-82%';
+      } else if (history.classList.contains('hidden') && !startGame.classList.contains('active')) {
+            hint.style.marginTop = '-82%';
+      } else {
+            hint.style.marginTop = '-72%';
       }
 })
 
@@ -169,7 +171,7 @@ function checkNumber() {
             winner();
       } else if (inputValue > random) {
             big();
-      } else if (lastTimes <= 0) {
+      } else if (lastTimes === 1) {
             gameOver();
       } else {
             small();
@@ -177,8 +179,8 @@ function checkNumber() {
 
       //history
       if (inputValue !== random) {
-            inputValues.push(inputValue);
             lastTimes--;
+            inputValues.push(inputValue);
             //history展示inputValues
             history.classList.remove('hidden');
             history.innerHTML = `Recent: ` + `${inputValues.join(' ')}`;
@@ -221,7 +223,8 @@ function winner() {
       numCard.classList.add('flipped');
       input.classList.add('hidden');
       document.getElementById('restartBtn').classList.remove('hidden');
-      history.classList.add('hidden');
+      // history.classList.add('hidden');
+      history.remove();
       hint.remove();
 }
 
@@ -240,12 +243,14 @@ function gameOver() {
       numCard.classList.add('flipped');
       input.classList.add('hidden');
       document.getElementById('restartBtn').classList.remove('hidden');
-      history.classList.add('hidden');
+      history.remove();
+      // history.classList.add('hidden');
       text.children[1].classList.remove('hidden');
+      text.children[1].style.marginBottom = '0';
       hint.remove();
 
-      (lastTimes <= 0) ? text.children[1].textContent = 'Out of Chances!'
-            : text.children[1].textContent = "Time's up!";
+      (lastTimes === 1) ? text.children[1].textContent = 'Out of Chances!'
+            : text.children[1].textContent = "Time's up";
 }
 
 
