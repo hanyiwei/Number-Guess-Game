@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Game</title>
+      <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+      <div class="garden"></div>
+      <div class="game_container">
+            <div class="hint hidden">👻</div>
+            <div class="numCard" onclick="flipCard()">
+                  <div class="front">
+                        <span>?</span>
+                  </div>
+                  <div class="back">
+                        <span>🌸</span>
+                  </div>
+            </div>
+
+            <div class="text">
+                  <div class="time_container">
+                        <div class="timeIcon hidden"></div>
+                        <h1> Number Guess Game </h1>
+                  </div>
+                  <p>Enter an integer between 1 and 100 </p>
+            </div>
+
+            <div class="startGame">
+                  <div class="input_container">
+                        <input type="number" id="input" required min="1" max="100" placeholder="" autocomplete="off">
+                        <div id="confirmBtn" onclick="checkNumber()">
+                              <svg width="16px" height="16px" viewBox="0 0 14 10">
+                                    <path d="M1,5 L11,5"></path>
+                                    <polyline points="8 1 12 5 8 9"></polyline>
+                              </svg>
+                        </div>
+                  </div>
+                  <button id="startBtn">Start</button>
+                  <button id="restartBtn" class="hidden" onclick="restart()">Restart</button>
+                  <div class="history hidden"></div>
+            </div>
+      </div>
+
+      <script src="script.js"></script>
+</body>
+
+</html>
