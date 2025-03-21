@@ -83,6 +83,8 @@ let rotates = () => -360 / 50 * timer;
 
 
 startBtn.addEventListener('click', () => {
+      clearInterval(intervalId);
+      timer = 50;
       startGame.classList.add('active');
       hint.textContent = '🤡 Sneak a look?';
       hint.style.marginTop = '-68%';

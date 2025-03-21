@@ -65,8 +65,8 @@ body {
       align-items: center;
       flex-direction: column;
       background-color: var(--color-white);
-      /* margin: 0 auto; */
-      width: 600px;
+      width: 96%;
+      max-width: 600px;
       height: 600px;
       border-radius: 50px;
       perspective: 1000px;
@@ -117,11 +117,9 @@ body {
             opacity: 0.3;
       }
 
-      &::before {
+      &::before,
+      &::after {
             position: absolute;
-            top: 14px;
-            left: 8px;
-            content: 'GUESS';
             font-size: 14px;
             font-weight: 800;
             color: var(--color-container-y);
@@ -129,16 +127,16 @@ body {
             writing-mode: vertical-rl;
       }
 
+      &::before {
+            top: 14px;
+            left: 8px;
+            content: 'GUESS';
+      }
+
       &::after {
-            position: absolute;
             bottom: 14px;
             right: 8px;
             content: 'GAME';
-            font-size: 14px;
-            font-weight: 800;
-            color: var(--color-container-y);
-            opacity: 0.06;
-            writing-mode: vertical-rl;
             scale: -1;
       }
 }
@@ -154,28 +152,28 @@ body {
             font-weight: 800;
       }
 
-      &::before {
+      &::before,
+      &::after {
             position: absolute;
-            top: 14px;
-            left: 8px;
-            content: 'GUESS';
             font-size: 14px;
             font-weight: 800;
             color: var(--color-panel-x);
-            opacity: 0.1;
             writing-mode: vertical-rl;
       }
 
+
+      &::before {
+            top: 14px;
+            left: 8px;
+            content: 'GUESS';
+            opacity: 0.1;
+      }
+
       &::after {
-            position: absolute;
             bottom: 14px;
             right: 8px;
             content: 'GAME';
-            font-size: 14px;
-            font-weight: 800;
-            color: var(--color-panel-x);
             opacity: 0.1;
-            writing-mode: vertical-rl;
             scale: -1;
       }
 }
@@ -209,7 +207,6 @@ p {
 .hint {
       position: absolute;
       margin-top: -78%;
-      /* top: 8%; */
       font-size: 15px;
       padding: 10px 16px;
       background-color: var(--color-text);
@@ -264,7 +261,6 @@ p {
       margin-right: 10px;
       border: 4px solid var(--color-container-y);
       border-radius: 50%;
-      /* visibility: hidden; */
 
       &::before {
             content: '';
@@ -278,22 +274,10 @@ p {
       }
 }
 
-.timeRed {
-      width: 22px;
-      height: 22px;
-      background-color: white;
-      margin-right: 10px;
-      border: 4px solid red;
-      border-radius: 50%;
+.timeIcon.timeRed {
+      border-color: red;
 
       &::before {
-            content: '';
-            position: absolute;
-            margin-left: 9px;
-            margin-top: 4px;
-            width: 4px;
-            height: 10px;
-            border-radius: 4px;
             background-color: red;
       }
 }
@@ -403,24 +387,21 @@ svg {
       /* transform: translate3d(0, 0, 0); */
 }
 
-#input.highlight::placeholder {
+#input.highlight::placeholder,
+#input.tooHigh::placeholder,
+#input.tooLow::placeholder {
       opacity: 1 !important;
-      color: var(--color-text);
       transition: opacity 0.3s ease-in-out;
+      color: var(--color-text);
 }
 
 #input.tooHigh::placeholder {
-      opacity: 1 !important;
       color: var(--color-container-y);
-      transition: opacity 0.3s ease-in-out;
       font-weight: 600;
       font-size: 17px;
 }
 
 #input.tooLow::placeholder {
-      opacity: 1 !important;
-      color: var(--color-text);
-      transition: opacity 0.3s ease-in-out;
       font-weight: 600;
       font-size: 17px;
 }
@@ -458,4 +439,25 @@ svg {
       display: none;
       /* pointer-events: none; */
       /* visibility: hidden; */
+}
+
+button {
+      min-width: 44px;
+      min-height: 44px;
+      touch-action: manipulation;
+}
+
+@media (max-width: 768px) {
+
+      h1 {
+            font-size: 24px !important;
+      }
+
+      .hint {
+            display: none;
+      }
+
+      .startGame.active #input {
+            width: 260px;
+      }
 }
