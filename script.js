@@ -228,6 +228,7 @@ function winner() {
       // history.classList.add('hidden');
       history.remove();
       hint.remove();
+      update();
 }
 
 
@@ -246,8 +247,7 @@ function gameOver() {
       input.classList.add('hidden');
       document.getElementById('restartBtn').classList.remove('hidden');
       history.remove();
-      // history.classList.add('hidden');
-      text.children[1].classList.remove('hidden');
+      document.querySelector('.text > p').classList.remove('hidden');
       text.children[1].style.marginBottom = '0';
       hint.remove();
 
@@ -295,7 +295,53 @@ input.addEventListener('keydown', (e) => {
 });
 
 
+//完结撒花
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d', { alpha: true });
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const colors = [
+      "#FF6B6B", "#FFE66D",  // 红/黄
+      "#4ECDC4", "#45B7D1",  // 青/蓝
+      "#96CEB4", "#FFEEAD",  // 绿/米黄
+      "#FF9999", "#FFD099"   // 粉红/橙
+];
 
+const papers = Array.from({ length: 60 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * -canvas.height,
+      speed: 4 + Math.random() * 3,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      sway: Math.random() * 2,
+      width: 8 + Math.random() * 8,
+      height: 6 + Math.random() * 6,
+      angle: Math.random() * 360,
+      rotateSpeed: (Math.random() - 0.5) * 3,
+}));
 
+function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      papers.forEach(p => {
+            //垂直下落
+            p.y += p.speed;
+            p.x += Math.sin(Date.now() / 1000) * p.sway;
+            p.angle += p.rotateSpeed;
 
+            if (p.y > canvas.height) {
+                  p.y = -20;
+                  p.x = Math.random() * canvas.width;
+            }
+
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.angle * Math.PI / 180);
+
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.width / 2, -p.height / 2, p.width, p.height);
+
+            ctx.restore();
+      });
+
+      requestAnimationFrame(update);
+}
