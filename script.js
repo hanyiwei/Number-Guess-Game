@@ -18,7 +18,10 @@ const color = [
 ];
 const flowerNum = 500;
 //花背景
-const flowers = Array.from({ length: flowerNum }, () => {
+const flowers = Array.from({ length: flowerNum }, createFlower);
+flowers.forEach(flower => garden.appendChild(flower));
+
+function createFlower() {
       const flower = document.createElement('div');
       flower.classList.add('flower');
       flower.innerHTML = '🌸';
@@ -40,9 +43,7 @@ const flowers = Array.from({ length: flowerNum }, () => {
             });
       })
       return flower;
-}).forEach(flower =>
-      garden.appendChild(flower)
-);
+}
 
 function flipCard() {
       numCard.classList.toggle('flipped');
@@ -91,8 +92,7 @@ startBtn.addEventListener('click', () => {
       input.placeholder = `${lastTimes} chances left`;
       if (numCard.classList.contains('flipped')) {
             numCard.classList.remove('flipped');
-
-            // 卡片背面变成生成答案
+            // 卡片背面是答案
             numCard.addEventListener('transitionend', () => {
                   backNum();
             }, { once: true })
@@ -100,9 +100,10 @@ startBtn.addEventListener('click', () => {
             backNum();
       }
 
+      history.classList.remove('hidden');
+      history.style.visibility = 'hidden';
 
       //去掉text > p标签 h1改为倒计时
-      // text.removeChild(text.children[1]);
       text.children[1].classList.add('hidden');
       document.querySelector('h1').textContent = `0:` + `${timer}`;
       document.querySelector('.timeIcon').classList.remove('hidden');
@@ -135,6 +136,8 @@ startBtn.addEventListener('click', () => {
       }, { once: true });
 })
 
+
+let random;
 // 生成随机数
 const randomNum = () => {
       random = Math.floor(Math.random() * 100) + 1;
@@ -184,7 +187,7 @@ function checkNumber() {
             lastTimes--;
             inputValues.push(inputValue);
             //history展示inputValues
-            history.classList.remove('hidden');
+            history.style.visibility = 'visible';
             history.innerHTML = `Recent: ` + `${inputValues.join(' ')}`;
       }
 }
@@ -192,7 +195,7 @@ function checkNumber() {
 
 function wrong() {
       input.value = '';
-      input.placeholder = 'Enter an integer between 1 and 100';
+      input.placeholder = 'Between 1 and 100';
       input.classList.add('highlight');
       // 添加自动移除延时
       setTimeout(() => {
@@ -205,7 +208,7 @@ function wrong() {
 
 const duplicated = () => {
       input.value = '';
-      input.placeholder = 'You have already entered this';
+      input.placeholder = 'Duplicated entry';
       input.classList.add('highlight');
       // 添加自动移除延时
       setTimeout(() => {
@@ -258,7 +261,7 @@ function gameOver() {
 
 function big() {
       input.value = '';
-      input.placeholder = 'Too high!';
+      input.placeholder = 'Too high';
       input.classList.add('tooHigh');
       // 添加自动移除延时
       setTimeout(() => {
@@ -271,7 +274,7 @@ function big() {
 
 function small() {
       input.value = '';
-      input.placeholder = 'Too low!';
+      input.placeholder = 'Too low';
       input.classList.add('highlight');
       // 添加自动移除延时
       setTimeout(() => {
