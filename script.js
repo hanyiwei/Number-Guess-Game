@@ -28,7 +28,7 @@ function createFlower() {
 
       //移入变色
       flower.addEventListener('mouseenter', () => {
-            // flower.style.filter = 'grayscale(0)' 放弃了 原打算恢复色相
+            // flower.style.filter = 'grayscale(0)' 放弃
             flower.style.transform = 'scale(1.1)';
             flower.style.opacity = 0.4;
             flower.style.rotate = '-10deg';
@@ -171,24 +171,31 @@ function checkNumber() {
             return;
       }
 
-      //比大小
+      //对不对
       if (inputValue === random) {
             winner();
-      } else if (inputValue > random) {
-            big();
-      } else if (lastTimes === 1) {
-            gameOver();
       } else {
-            small();
-      }
-
-      //history
-      if (inputValue !== random) {
+            //每次错了就--
             lastTimes--;
             inputValues.push(inputValue);
+
             //history展示inputValues
             history.style.visibility = 'visible';
             history.innerHTML = `Recent: ` + `${inputValues.join(' ')}`;
+
+
+            //次数有吗
+            if (lastTimes <= 0) {
+                  gameOver();
+                  return;
+            }
+
+            //比大小
+            if (inputValue > random) {
+                  big();
+            } else {
+                  small();
+            }
       }
 }
 
@@ -210,7 +217,7 @@ const duplicated = () => {
       input.value = '';
       input.placeholder = 'Duplicated entry';
       input.classList.add('highlight');
-      // 添加自动移除延时
+      // 自动移除
       setTimeout(() => {
             input.classList.remove('highlight');
             input.placeholder = `${lastTimes} chances left`;
@@ -254,7 +261,7 @@ function gameOver() {
       text.children[1].style.marginBottom = '0';
       hint.remove();
 
-      (lastTimes === 1) ? text.children[1].textContent = 'Out of Chances!'
+      (lastTimes <= 0) ? text.children[1].textContent = 'Out of Chances!'
             : text.children[1].textContent = "Time's up";
 }
 
