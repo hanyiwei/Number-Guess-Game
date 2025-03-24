@@ -9,6 +9,7 @@ html {
 }
 
 :root {
+      font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Open Sans', 'Helvetica Neue', sans-serif;
       --color-text: #0b3b4b;
       --color-panel: #dbf6fd;
       --color-panel-x: #008ebd;
@@ -113,7 +114,7 @@ body {
       span {
             font-size: 70px;
             color: var(--color-container-y);
-            font-weight: 800;
+            font-weight: 600;
             opacity: 0.3;
       }
 
@@ -121,7 +122,7 @@ body {
       &::after {
             position: absolute;
             font-size: 14px;
-            font-weight: 800;
+            font-weight: 600;
             color: var(--color-container-y);
             opacity: 0.06;
             writing-mode: vertical-rl;
@@ -149,14 +150,14 @@ body {
             font-size: 50px;
             filter: hue-rotate(240deg);
             opacity: 0.15;
-            font-weight: 800;
+            font-weight: 600;
       }
 
       &::before,
       &::after {
             position: absolute;
             font-size: 14px;
-            font-weight: 800;
+            font-weight: 600;
             color: var(--color-panel-x);
             writing-mode: vertical-rl;
       }
@@ -239,6 +240,7 @@ p {
 
       h1 {
             font-size: 30px;
+            font-weight: 600;
             color: var(--color-text);
             height: 40px;
             opacity: 1;
@@ -269,6 +271,7 @@ p {
 
 .timeIcon.timeRed {
       border-color: red;
+      background-color: var(--color-white);
 
       &::before {
             background-color: red;
@@ -379,8 +382,12 @@ svg {
       opacity: 1 !important;
       transition: opacity 0.3s ease-in-out;
       color: var(--color-container-y);
+}
+
+#input.highlight,
+#input.tooHigh {
+      -webkit-animation: shake 0.4s ease-in-out;
       animation: shake 0.4s ease-in-out;
-      font-weight: 600;
 }
 
 @keyframes shake {
