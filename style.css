@@ -35,7 +35,7 @@ body {
 .garden {
       flex-wrap: wrap;
       display: flex;
-      gap: 20px;
+      gap: 24px;
       padding: 10px;
       font-size: 30px;
       justify-content: center;
@@ -50,6 +50,7 @@ body {
       /* filter: grayscale(1); */
       /* 改变色相 */
       filter: hue-rotate(240deg);
+      width: 38px;
 
       transition:
             transform 0.3s ease-in-out,
@@ -105,6 +106,12 @@ body {
       align-items: center;
       transition: transform 0.5s ease-in-out;
       border-radius: 20px;
+
+      span {
+            font-size: 70px;
+            font-weight: 600;
+            opacity: 0.3;
+      }
 }
 
 .front {
@@ -112,10 +119,7 @@ body {
       transform: rotateY(0deg);
 
       span {
-            font-size: 70px;
             color: var(--color-container-y);
-            font-weight: 600;
-            opacity: 0.3;
       }
 
       &::before,
@@ -147,10 +151,7 @@ body {
       transform: rotateY(180deg);
 
       span {
-            font-size: 50px;
-            filter: hue-rotate(240deg);
-            opacity: 0.15;
-            font-weight: 600;
+            color: var(--color-panel-x);
       }
 
       &::before,
@@ -448,6 +449,10 @@ svg {
 
       .hint {
             display: none;
+      }
+
+      .flower {
+            width: 32px;
       }
 
       .startGame.active #input {

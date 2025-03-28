@@ -22,15 +22,15 @@ const flowers = Array.from({ length: flowerNum }, createFlower);
 flowers.forEach(flower => garden.appendChild(flower));
 
 function createFlower() {
-      const flower = document.createElement('div');
+      const flower = document.createElement('img');
+      flower.src = 'flower.png';
       flower.classList.add('flower');
-      flower.innerHTML = '🌸';
 
       //移入变色
       flower.addEventListener('mouseenter', () => {
             // flower.style.filter = 'grayscale(0)' 放弃
-            flower.style.transform = 'scale(1.1)';
-            flower.style.opacity = 0.4;
+            flower.style.transform = 'scale(1.05)';
+            flower.style.opacity = 0.3;
             flower.style.rotate = '-10deg';
             //filter=color数组里随机
             flower.style.filter = color[Math.floor(Math.random() * color.length)];
@@ -38,8 +38,8 @@ function createFlower() {
             flower.addEventListener('mouseleave', () => {
                   setTimeout(() => {
                         flower.style.transform = 'scale(1)';
-                        flower.style.opacity = 0.15;
-                  }, 2000);
+                        flower.style.opacity = 0.08;
+                  }, 1500);
             });
       })
       return flower;
@@ -68,7 +68,7 @@ numCard.addEventListener('mouseenter', () => {
 numCard.addEventListener('mouseleave', () => {
 
       if (startGame.classList.contains('active')) {
-            hint.style.marginTop = '-68%';
+            hint.style.marginTop = '-72%';
       } else {
             hint.style.marginTop = '-78%';
       }
@@ -148,7 +148,7 @@ const backNum = () => {
       back.querySelector('span').textContent = `${random}`;
       back.querySelector('span').style.color = 'var(--color-panel-x)';
       back.querySelector('span').style.opacity = '1';
-      back.querySelector('span').style.filter = 'hue-rotate(0deg)';
+      back.querySelector('span').style.fontSize = '50px';
 }
 
 
